@@ -90,7 +90,7 @@ router.post('/', [auth, [
     }
 })
 
-// * @route  POST api/profile
+// * @route  GET api/profile
 // * @desc   Get all profiles
 // * @access Public
 
@@ -100,6 +100,26 @@ router.get('/', async (req, res) => {
         res.json(profile)
     } catch (err) {
         console.error(err.message)
+        res.status(500).send('Server Error')
+    }
+})
+
+// * @route  POST api/profile/user/:user_id
+// * @desc   Get profile by user id
+// * @access Public
+
+router.get('/user/:user_id', async (req, res) => {
+    try {
+        const profile = await Profile.findOne({user: req.params.user_id}).populate('user', ['name', 'avatar'])
+        if(!profile) {
+            return res.status(404).json({ msg: "Profile Not Found"})
+        }
+        res.json(profile)
+    } catch (err) {
+        console.error(err.message)
+        if(err.kind == 'ObjectId') {
+            return res.status(404).json({ msg: "Profile Not Found"})
+        }
         res.status(500).send('Server Error')
     }
 })
