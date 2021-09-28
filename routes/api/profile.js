@@ -272,7 +272,7 @@ router.delete("/education/:edu_id", auth, async (req, res) => {
     const removeIdx = profile.education
       .map((item) => item.id)
       .indexOf(req.params.edu_id);
-    profile.experience.splice(removeIdx, 1);
+    profile.education.splice(removeIdx, 1);
     await profile.save();
     res.json(profile);
   } catch (err) {
