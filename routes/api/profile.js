@@ -296,7 +296,7 @@ router.get("/github/:username", (req, res) => {
         "githubclientid"
       )}&client_secret=${config.get("githubsecret")}`,
       method: "GET",
-      header: { "user-agent": "node.js" },
+      headers: { "user-agent": "node.js" },
     };
     request(options, (error, response, body) => {
       if (error) {
