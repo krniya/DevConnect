@@ -93,13 +93,17 @@ router.put("/like/:id", auth, async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
         // * Checking if post is already liked
-        if (post.likes.filter((like) => like.user.toString() === req.user.id).length > 0) {
-            return res.status(400).json({ msg: "Post Already Liked" });
-        }
+        // if (post.likes.filter((like) => like.user.toString() === req.user.id).length > 0) {
+        //     return res.status(400).json({ msg: "Post Already Liked" });
+        // }
+        console.log(req.user.id);
         post.likes.unshift({ user: req.user.id });
         await post.save();
         res.json(post.likes);
-    } catch (err) {}
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).send("Server Error");
+    }
 });
 
 // * @route     POST api/posts/comment/:id
@@ -131,5 +135,29 @@ router.post(
         }
     }
 );
+
+// * @route     POST api/posts/comment/:id/comment_id
+// * @desc      Delete a post
+// * @access    Private
+
+router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        // * Pull out commet
+        const comment = post.comments.find((comment) => comment.id === req.params.comment_id);
+
+        // * Make sure comment exist
+        if (!comment) {
+            return res.status(404).json({ msg: "Comment doesnt exist" });
+        }
+        // * Check User
+        if (comment.user.toString() !== req.user.id) {
+            return res.status(401).json({ msg: "User not authorized" });
+        }
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).send("Server Error");
+    }
+});
 
 module.exports = router;
