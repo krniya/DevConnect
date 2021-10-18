@@ -10,6 +10,7 @@ export const loadUser = () => async (dispatch) => {
     }
     try {
         const res = await axios.get("/auth/api");
+        console.log(res.data);
         dispatch({
             type: USER_LOADED,
             payload: res.data,
