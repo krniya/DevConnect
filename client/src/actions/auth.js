@@ -9,8 +9,7 @@ export const loadUser = () => async (dispatch) => {
         setAuthToken(localStorage.token);
     }
     try {
-        const res = await axios.get("/auth/api");
-        console.log(res.data);
+        const res = await axios.get("/api/auth");
         dispatch({
             type: USER_LOADED,
             payload: res.data,
@@ -34,7 +33,6 @@ export const register =
         const body = JSON.stringify({ name, email, password });
         try {
             const res = await axios.post("/api/users", body, config);
-
             dispatch({
                 type: REGISTER_SUCESS,
                 payload: res.data,
