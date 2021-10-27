@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { login } from "../../actions/auth";
 
-export const Login = () => {
+const login = ({ login }) => {
     const [formData, setFormDate] = useState({
         email: "",
         password: "",
@@ -49,3 +52,9 @@ export const Login = () => {
         </Fragment>
     );
 };
+
+Login.propTypes = {
+    login: PropTypes.func.isRequired,
+};
+
+export default connect(null, { login })(login);
