@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/auth";
 
-const login = ({ login }) => {
+const Login = ({ login }) => {
     const [formData, setFormDate] = useState({
         email: "",
         password: "",
@@ -15,7 +15,7 @@ const login = ({ login }) => {
     const onChange = (e) => setFormDate({ ...formData, [e.target.name]: e.target.value });
     const onSubmits = async (e) => {
         e.preventDefault();
-        console.log("SUCESSS");
+        login(email, password);
     };
 
     return (
@@ -57,4 +57,4 @@ Login.propTypes = {
     login: PropTypes.func.isRequired,
 };
 
-export default connect(null, { login })(login);
+export default connect(null, { login })(Login);

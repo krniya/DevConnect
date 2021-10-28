@@ -44,6 +44,7 @@ export const register =
                 type: REGISTER_SUCESS,
                 payload: res.data,
             });
+            dispatch(loadUser());
         } catch (err) {
             const errors = err.response.data.errors;
             if (errors) {
@@ -71,6 +72,7 @@ export const login =
                 type: LOGIN_SUCESS,
                 payload: res.data,
             });
+            dispatch(loadUser());
         } catch (err) {
             const errors = err.response.data.errors;
             if (errors) {
