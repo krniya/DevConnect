@@ -15,6 +15,7 @@ const Login = ({ login }) => {
     const onChange = (e) => setFormDate({ ...formData, [e.target.name]: e.target.value });
     const onSubmits = async (e) => {
         e.preventDefault();
+        console.log(email, password, "No data");
         login(email, password);
     };
 
