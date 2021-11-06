@@ -9,7 +9,7 @@ export const getCurrentProfile = () => async (dispatch) => {
         // if (localStorage.token) {
         //     setAuthToken(localStorage.token);
         // }
-        const res = await axios.get("/api/profile/me");
+        const res = await axios.get("http://localhost:5000/api/profile/me");
         dispatch({
             type: GET_PROFILE,
             payload: res.data,
