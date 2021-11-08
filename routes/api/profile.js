@@ -12,7 +12,6 @@ const { check, validationResult } = require("express-validator");
 // * @access    Private
 router.get("/me", auth, async (req, res) => {
     try {
-        console.log(req.user.id);
         const profile = await Profile.findOne({ user: req.user.id }).populate("user", [
             "name",
             "avatar",
