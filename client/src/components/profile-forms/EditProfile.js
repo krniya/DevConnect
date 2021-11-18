@@ -43,7 +43,22 @@ const EditProfile = ({
             twitter: loading || !profile.twitter ? "" : profile.twitter,
             instagram: loading || !profile.instagram ? "" : profile.instagram,
         });
-    }, [loading]);
+    }, [
+        getCurrentProfile,
+        loading,
+        profile.bio,
+        profile.company,
+        profile.facebook,
+        profile.githubusername,
+        profile.instagram,
+        profile.linkedin,
+        profile.location,
+        profile.skills,
+        profile.status,
+        profile.twitter,
+        profile.website,
+        profile.youtube,
+    ]);
 
     const {
         company,
@@ -226,9 +241,9 @@ const EditProfile = ({
                 )}
 
                 <input type="submit" className="btn btn-primary my-1" />
-                <a className="btn btn-light my-1" href="dashboard.html">
+                <Link className="btn btn-light my-1" to="/dashboard">
                     Go Back
-                </a>
+                </Link>
             </form>
         </Fragment>
     );
