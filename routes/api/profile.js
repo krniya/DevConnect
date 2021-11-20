@@ -189,7 +189,7 @@ router.put(
             const profile = await Profile.findOne({ user: req.user.id });
             profile.experience.unshift(newExp);
             await profile.save();
-            res.status(400).json(profile);
+            res.status(200).json(profile);
         } catch (err) {
             console.error(err.message);
             res.status(500).send("Server Error");
@@ -251,7 +251,7 @@ router.put(
             const profile = await Profile.findOne({ user: req.user.id });
             profile.education.unshift(newEdu);
             await profile.save();
-            res.status(400).json(profile);
+            res.status(200).json(profile);
         } catch (err) {
             console.error(err.message);
             res.status(500).send("Server Error");
