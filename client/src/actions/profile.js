@@ -43,6 +43,22 @@ export const getProfiles = () => async (dispatch) => {
     }
 };
 
+// * Get profile by ID
+export const getProfileByID = (userID) => async (dispatch) => {
+    try {
+        const res = await axios.get(`/api/profile/user/${userID}`);
+        dispatch({
+            type: GET_PROFILES,
+            payload: res.data,
+        });
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: { msg: err.response.statusText, status: err.response.status },
+        });
+    }
+};
+
 // * Create or update profile
 
 export const createProfile =
