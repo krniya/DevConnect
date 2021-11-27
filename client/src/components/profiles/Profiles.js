@@ -4,12 +4,12 @@ import Spinner from "../lauout/Spinner";
 import { connect } from "react-redux";
 import { getProfiles } from "../../actions/profile";
 import profile from "../../reducers/profile";
-import ProfileItem from "../ProfileItem";
+import ProfileItem from "./ProfileItem";
 
 function Profiles({ getProfiles, profile: { profiles, loading } }) {
     useEffect(() => {
         getProfiles();
-    }, []);
+    }, [getProfiles]);
     return (
         <Fragment>
             {loading ? (
